@@ -1,0 +1,22 @@
+{
+  "name": "lumora-backend",
+  "version": "1.0.0",
+  "description": "Backend Node/Express para servir professions.json na rota /api/professions",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "api",
+    "professions",
+    "lumora"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}

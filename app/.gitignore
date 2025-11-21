@@ -2,6 +2,8 @@
 node_modules/
 .npm-store/
 package-lock.json
+/backend/node_modules/
+/backend/package-lock.json
 
 # Build outputs
 dist/
