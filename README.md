@@ -223,11 +223,89 @@ fetch('http://localhost:3000/api/professions')
 
 ---
 
+Este projeto demonstra a orquestração de dois serviços (Frontend Nginx e Banco de Dados MySQL) usando Docker Compose para simular um ambiente de deploy de produção.
+
+1. Arquitetura da Solução (Trilha A)
+A arquitetura utiliza uma abordagem multi-containers, onde o Frontend (SPA) é servido por um servidor web leve (Nginx) e o Backend (Banco de Dados) é isolado em um container MySQL.
+
+Frontend (web): Contêiner Nginx que serve a Aplicação de Página Única (SPA) estática. Expõe a porta 8080 no host (sua máquina) e mapeia para a porta 80 do contêiner.
+
+Banco de Dados (db): Contêiner MySQL que armazena os dados. Utiliza volumes para persistência dos dados e inicializa o schema e os dados iniciais (db/schema.sql e db/seed.sql) na primeira execução.
+
+Orquestração: Gerenciada pelo docker-compose.yml que define a rede interna e as dependências entre os serviços.
+
+2. Pré-Requisitos
+Para executar o projeto, você precisa ter instalado:
+
+Docker Engine
+
+Docker Compose
+
+Git
+
+3. Como Executar o Deploy
+Siga os passos abaixo para construir e iniciar o ambiente. O arquivo de configuração principal (docker-compose.yml e Dockerfile) está localizado no diretório /ops.
+
+3.1. Navegação
+Navegue até a pasta de deploy no terminal:
+
+Bash
+
+cd ops
+3.2. Construção das Imagens
+Construa as imagens do Docker, incluindo a imagem personalizada do Frontend que copia o código da SPA:
+
+Bash
+
+docker compose build --no-cache
+3.3. Inicialização do Ambiente
+Inicie os dois contêineres (web e db) em modo detached (segundo plano):
+
+Bash
+
+docker compose up -d
+4. Validação e Evidências
+Após a inicialização, você deve gerar as seguintes evidências para comprovar a funcionalidade da Trilha A.
+
+4.1. Verificação do Status dos Contêineres
+Confirme que ambos os serviços estão rodando (status Up):
+
+Bash
+
+docker compose ps
+(INSERIR AQUI O PRINT DA SAÍDA DO COMANDO docker compose ps COM OS DOIS SERVIÇOS 'UP')
+
+4.2. Acesso ao Frontend
+Acesse a aplicação no seu navegador:
+
+http://localhost:8080
+(INSERIR AQUI O PRINT/GIF DA APLICAÇÃO CARREGANDO NO NAVEGADOR)
+
+4.3. Validação do Banco de Dados
+Conecte-se ao MySQL e valide que os scripts de inicialização foram executados, carregando as tabelas e dados.
+
+Host: localhost
+
+Porta: 3306 (Padrão)
+
+Banco: gs_ai
+
+(INSERIR AQUI O PRINT DA CONSULTA SQL MOSTRANDO OS DADOS DE EXEMPLO DO seed.sql)
+
+5. Comandos de Limpeza (Opcional)
+Para derrubar e remover os contêineres e volumes (para liberar recursos ou começar do zero):
+
+Bash
+
+# Derruba os contêineres e a rede
+docker compose down
+
+# Derruba os contêineres e remove os volumes (apaga os dados do banco)
+docker compose down -v
+
+
 ## Integrantes e RMs
-
-
-
 - Nome 1 Álvaro Milantonio — RM: 561652
-- Nome 2 — RM: ________
-- Nome 3 — RM: ________
-- Nome 4 — RM: ________
+- Nome 2 Victoria Barreto — RM: 562435
+- Nome 3 Helena Cáceres RM: 563814
+- Nome 4 Leonardo Basseti — RM: 
